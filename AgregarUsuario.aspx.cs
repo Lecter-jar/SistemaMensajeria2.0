@@ -14,11 +14,6 @@ public partial class AgregarUsuario : System.Web.UI.Page
         {
             iniciarLlenadoComuna();
 
-
-            // probando
-
-            //git
-
         }
     }
 
