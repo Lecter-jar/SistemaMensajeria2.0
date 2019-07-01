@@ -13,7 +13,7 @@ public partial class AgregarUsuario : System.Web.UI.Page
         if (!IsPostBack)
         {
             iniciarLlenadoComuna();
-
+            //prpobansdo
         }
     }
 
