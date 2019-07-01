@@ -1,0 +1,94 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width"/>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+    <title>
+        Servicios de mensajeria
+    </title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</head>
+
+
+<body>
+    <form id="form1" runat="server">
+    <div class="wrap" aria-orientation="horizontal">
+<span class="decor"></span>
+<nav>
+  <ul class="primary">
+      <li>
+      <a href="Inicio.aspx">INICIO</a>
+    </li>
+    <li>
+      <a href="#">Usuario</a>
+      <ul class="sub">
+        <li><a href="AgregarUsuario.aspx">Agregar</a></li>
+        <li><a href="ListarUsuarios.aspx">Listar / Modificar / Eliminar</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Recarga</a>
+      <ul class="sub">
+        <li><a href="RealizarRecarga.aspx">Realizar Recarga</a></li>
+        <li><a href="ListarRecargas.aspx">Listar Recargas</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Mensajes</a>
+      <ul class="sub">
+        <li><a href="EnviarMensaje.aspx">Enviar Mensaje</a></li>
+        <li><a href="VerMensajes.aspx">Ver Mensajes</a></li>
+      </ul>  
+    </li>
+      <li>
+      <a href="#">Conexión</a>
+      <ul class="sub">
+        <li><a href="ConectarDesconectar.aspx">Conectar/Desconectar</a></li>
+      </ul>  
+    </li>
+      <li>
+      <a href="#">Desvíos</a>
+      <ul class="sub">
+        <li><a href="ActivarDesactivar.aspx">Activar/Desactivar</a></li>
+      </ul>  
+    </li>
+    <li>
+      <a href="#">Teléfono</a>
+      <ul class="sub">
+        <li><a href="IngresarTelefono.aspx">Ingresar Teléfono</a></li>
+        <li><a href="EliminarTelefono.aspx">Eliminar Teléfono</a></li>
+        <li><a href="ListarTelefonos.aspx">Listar Teléfonos</a></li>
+      </ul>  
+    </li>
+    <li>
+      <a href="#">Administrador</a>
+      <ul class="sub">
+        <li><a href="MostrarEstadisticas.aspx">Ver Estadisticas</a></li>
+      </ul>  
+    </li>
+      <li>
+      <a href="#">Comuna</a>
+      <ul class="sub">
+        <li><a href="AgregarComuna.aspx">Agregar</a></li>
+          <li><a href="ListarComunas.aspx">Listar / Modificar / Eliminar</a></li>
+      </ul>  
+    </li>
+      <li>
+      <a href="QuienesSomos.aspx">Quienes somos</a>
+      
+    </li>
+  </ul>
+</nav>
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
