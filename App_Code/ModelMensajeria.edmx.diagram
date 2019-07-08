@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fe69d6d0ad814aeeb3775e389d8e0605" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Administrador" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Banco" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Comuna" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Desvio" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Historial" Width="1.5" PointX="2.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Mensaje" Width="1.5" PointX="10" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Recarga" Width="1.5" PointX="5.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Region" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Tarifa" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Telefono" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Transbank" Width="1.5" PointX="8" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Usuario" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Usuario_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Usuario_comuna" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Telefono_Desvio" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Mensaje_Tarifa" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Transbank_Recarga" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Usuario_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.FK_Telefono_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

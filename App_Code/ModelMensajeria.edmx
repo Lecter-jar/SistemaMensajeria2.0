@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdministrador" />
+          </Key>
+          <Property Name="idAdministrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rut" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Primer_nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Segundo_nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Apellido_materno" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Calle" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero_calle" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="idComuna" />
+          </Key>
+          <Property Name="idComuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Desvio">
+          <Key>
+            <PropertyRef Name="idDesvio" />
+          </Key>
+          <Property Name="idDesvio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="idTelefonoDesviador" Type="bigint" />
+          <Property Name="idTelefonoDesviado" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Uso_terminal" Type="bigint" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="ID_Terminal_movil" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+          </Key>
+          <Property Name="idMensaje" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contenido" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="idTelefonoEmisor" Type="bigint" Nullable="false" />
+          <Property Name="idTelefonoReceptor" Type="bigint" Nullable="false" />
+          <Property Name="idTarifa" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recarga">
+          <Key>
+            <PropertyRef Name="idRecarga" />
+          </Key>
+          <Property Name="idRecarga" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Monto" Type="bigint" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tarifa">
+          <Key>
+            <PropertyRef Name="idTarifa" />
+          </Key>
+          <Property Name="idTarifa" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Costo" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Identificador" Type="bigint" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EstadoConexion" Type="bit" Nullable="false" />
+          <Property Name="Saldo" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="bigint" Nullable="false" />
+          <Property Name="idDesvio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transbank">
+          <Key>
+            <PropertyRef Name="ID_Transbank" />
+          </Key>
+          <Property Name="ID_Transbank" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero_operacion" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Fecha_operacion" Type="datetime" Nullable="false" />
+          <Property Name="Monto" Type="bigint" Nullable="false" />
+          <Property Name="ID_Recarga" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rut" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Primer_nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Segundo_nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Apellido_materno" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Calle" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero_domicilio" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Banco" Type="int" Nullable="false" />
+          <Property Name="Comuna" Type="int" Nullable="false" />
+          <Property Name="Region" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Mensaje_Tarifa">
+          <End Role="Tarifa" Type="Self.Tarifa" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarifa">
+              <PropertyRef Name="idTarifa" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idTarifa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefono_Desvio">
+          <End Role="Desvio" Type="Self.Desvio" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desvio">
+              <PropertyRef Name="idDesvio" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="idDesvio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefono_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transbank_Recarga">
+          <End Role="Recarga" Type="Self.Recarga" Multiplicity="1" />
+          <End Role="Transbank" Type="Self.Transbank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recarga">
+              <PropertyRef Name="idRecarga" />
+            </Principal>
+            <Dependent Role="Transbank">
+              <PropertyRef Name="ID_Recarga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Banco">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_comuna">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="idComuna" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="pa_eliminarComuna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idComuna" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ingresarComuna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="pa_listarComunas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="pa_listarRecargas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Monto" Type="int" Mode="In" />
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+          <Parameter Name="idTelefono" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_modificarComuna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idComuna" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="pa_realizarRecarga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Monto" Type="int" Mode="In" />
+          <Parameter Name="Numero" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Desvio" EntityType="Self.Desvio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recarga" EntityType="Self.Recarga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarifa" EntityType="Self.Tarifa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transbank" EntityType="Self.Transbank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Mensaje_Tarifa" Association="Self.FK_Mensaje_Tarifa">
+            <End Role="Tarifa" EntitySet="Tarifa" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefono_Desvio" Association="Self.FK_Telefono_Desvio">
+            <End Role="Desvio" EntitySet="Desvio" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefono_Usuario" Association="Self.FK_Telefono_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transbank_Recarga" Association="Self.FK_Transbank_Recarga">
+            <End Role="Recarga" EntitySet="Recarga" />
+            <End Role="Transbank" EntitySet="Transbank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Banco" Association="Self.FK_Usuario_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_comuna" Association="Self.FK_Usuario_comuna">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Region" Association="Self.FK_Usuario_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdministrador" />
+          </Key>
+          <Property Name="idAdministrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rut" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Primer_nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Segundo_nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido_materno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Numero_calle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Banco" FromRole="Banco" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="idComuna" />
+          </Key>
+          <Property Name="idComuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_comuna" FromRole="Comuna" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Desvio">
+          <Key>
+            <PropertyRef Name="idDesvio" />
+          </Key>
+          <Property Name="idDesvio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="idTelefonoDesviador" Type="Int64" />
+          <Property Name="idTelefonoDesviado" Type="Int64" />
+          <NavigationProperty Name="Telefono" Relationship="Self.FK_Telefono_Desvio" FromRole="Desvio" ToRole="Telefono" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="idHistorial" />
+          </Key>
+          <Property Name="idHistorial" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uso_terminal" Type="Int64" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ID_Terminal_movil" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+          </Key>
+          <Property Name="idMensaje" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idTelefonoEmisor" Type="Int64" Nullable="false" />
+          <Property Name="idTelefonoReceptor" Type="Int64" Nullable="false" />
+          <Property Name="idTarifa" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Tarifa" Relationship="Self.FK_Mensaje_Tarifa" FromRole="Mensaje" ToRole="Tarifa" />
+        </EntityType>
+        <EntityType Name="Recarga">
+          <Key>
+            <PropertyRef Name="idRecarga" />
+          </Key>
+          <Property Name="idRecarga" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Monto" Type="Int64" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transbank" Relationship="Self.FK_Transbank_Recarga" FromRole="Recarga" ToRole="Transbank" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Region" FromRole="Region" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tarifa">
+          <Key>
+            <PropertyRef Name="idTarifa" />
+          </Key>
+          <Property Name="idTarifa" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Costo" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Mensaje" Relationship="Self.FK_Mensaje_Tarifa" FromRole="Tarifa" ToRole="Mensaje" />
+        </EntityType>
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Identificador" Type="Int64" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoConexion" Type="Boolean" Nullable="false" />
+          <Property Name="Saldo" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int64" Nullable="false" />
+          <Property Name="idDesvio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Desvio" Relationship="Self.FK_Telefono_Desvio" FromRole="Telefono" ToRole="Desvio" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Telefono_Usuario" FromRole="Telefono" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Transbank">
+          <Key>
+            <PropertyRef Name="ID_Transbank" />
+          </Key>
+          <Property Name="ID_Transbank" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero_operacion" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_operacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Monto" Type="Int64" Nullable="false" />
+          <Property Name="ID_Recarga" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Recarga" Relationship="Self.FK_Transbank_Recarga" FromRole="Transbank" ToRole="Recarga" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rut" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Primer_nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Segundo_nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido_materno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Numero_domicilio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Banco" Type="Int32" Nullable="false" />
+          <Property Name="Comuna" Type="Int32" Nullable="false" />
+          <Property Name="Region" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banco1" Relationship="Self.FK_Usuario_Banco" FromRole="Usuario" ToRole="Banco" />
+          <NavigationProperty Name="Comuna1" Relationship="Self.FK_Usuario_comuna" FromRole="Usuario" ToRole="Comuna" />
+          <NavigationProperty Name="Region1" Relationship="Self.FK_Usuario_Region" FromRole="Usuario" ToRole="Region" />
+          <NavigationProperty Name="Telefono" Relationship="Self.FK_Telefono_Usuario" FromRole="Usuario" ToRole="Telefono" />
+        </EntityType>
+        <Association Name="FK_Usuario_Banco">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_comuna">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="idComuna" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefono_Desvio">
+          <End Role="Desvio" Type="Self.Desvio" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desvio">
+              <PropertyRef Name="idDesvio" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="idDesvio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Tarifa">
+          <End Role="Tarifa" Type="Self.Tarifa" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarifa">
+              <PropertyRef Name="idTarifa" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idTarifa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transbank_Recarga">
+          <End Role="Recarga" Type="Self.Recarga" Multiplicity="1" />
+          <End Role="Transbank" Type="Self.Transbank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recarga">
+              <PropertyRef Name="idRecarga" />
+            </Principal>
+            <Dependent Role="Transbank">
+              <PropertyRef Name="ID_Recarga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telefono_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Telefono">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" />
+          <EntitySet Name="Banco" EntityType="Self.Banco" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" />
+          <EntitySet Name="Desvio" EntityType="Self.Desvio" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" />
+          <EntitySet Name="Recarga" EntityType="Self.Recarga" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tarifa" EntityType="Self.Tarifa" />
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" />
+          <EntitySet Name="Transbank" EntityType="Self.Transbank" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Usuario_Banco" Association="Self.FK_Usuario_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_comuna" Association="Self.FK_Usuario_comuna">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefono_Desvio" Association="Self.FK_Telefono_Desvio">
+            <End Role="Desvio" EntitySet="Desvio" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Tarifa" Association="Self.FK_Mensaje_Tarifa">
+            <End Role="Tarifa" EntitySet="Tarifa" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transbank_Recarga" Association="Self.FK_Transbank_Recarga">
+            <End Role="Recarga" EntitySet="Recarga" />
+            <End Role="Transbank" EntitySet="Transbank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Region" Association="Self.FK_Usuario_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telefono_Usuario" Association="Self.FK_Telefono_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <FunctionImport Name="pa_eliminarComuna">
+            <Parameter Name="idComuna" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ingresarComuna">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_listarComunas" ReturnType="Collection(DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.pa_listarComunas_Result)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_listarRecargas">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Monto" Mode="In" Type="Int32" />
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="idTelefono" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_modificarComuna">
+            <Parameter Name="idComuna" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_realizarRecarga">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Monto" Mode="In" Type="Int32" />
+            <Parameter Name="Numero" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="pa_listarComunas_Result">
+          <Property Type="Int32" Name="idComuna" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModelStoreContainer" CdmEntityContainer="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAEntities">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="idAdministrador" ColumnName="idAdministrador" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Primer_nombre" ColumnName="Primer_nombre" />
+                <ScalarProperty Name="Segundo_nombre" ColumnName="Segundo_nombre" />
+                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
+                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Numero_calle" ColumnName="Numero_calle" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banco">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comuna">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Comuna">
+              <MappingFragment StoreEntitySet="Comuna">
+                <ScalarProperty Name="idComuna" ColumnName="idComuna" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Desvio">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Desvio">
+              <MappingFragment StoreEntitySet="Desvio">
+                <ScalarProperty Name="idDesvio" ColumnName="idDesvio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="idTelefonoDesviador" ColumnName="idTelefonoDesviador" />
+                <ScalarProperty Name="idTelefonoDesviado" ColumnName="idTelefonoDesviado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historial">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Historial">
+              <MappingFragment StoreEntitySet="Historial">
+                <ScalarProperty Name="idHistorial" ColumnName="idHistorial" />
+                <ScalarProperty Name="Uso_terminal" ColumnName="Uso_terminal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ID_Terminal_movil" ColumnName="ID_Terminal_movil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="idMensaje" ColumnName="idMensaje" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="idTelefonoEmisor" ColumnName="idTelefonoEmisor" />
+                <ScalarProperty Name="idTelefonoReceptor" ColumnName="idTelefonoReceptor" />
+                <ScalarProperty Name="idTarifa" ColumnName="idTarifa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recarga">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Recarga">
+              <MappingFragment StoreEntitySet="Recarga">
+                <ScalarProperty Name="idRecarga" ColumnName="idRecarga" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarifa">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Tarifa">
+              <MappingFragment StoreEntitySet="Tarifa">
+                <ScalarProperty Name="idTarifa" ColumnName="idTarifa" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefono">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Telefono">
+              <MappingFragment StoreEntitySet="Telefono">
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="EstadoConexion" ColumnName="EstadoConexion" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idDesvio" ColumnName="idDesvio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transbank">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Transbank">
+              <MappingFragment StoreEntitySet="Transbank">
+                <ScalarProperty Name="ID_Transbank" ColumnName="ID_Transbank" />
+                <ScalarProperty Name="Numero_operacion" ColumnName="Numero_operacion" />
+                <ScalarProperty Name="Fecha_operacion" ColumnName="Fecha_operacion" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="ID_Recarga" ColumnName="ID_Recarga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Primer_nombre" ColumnName="Primer_nombre" />
+                <ScalarProperty Name="Segundo_nombre" ColumnName="Segundo_nombre" />
+                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
+                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Numero_domicilio" ColumnName="Numero_domicilio" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_eliminarComuna" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_eliminarComuna" />
+          <FunctionImportMapping FunctionImportName="pa_ingresarComuna" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_ingresarComuna" />
+          <FunctionImportMapping FunctionImportName="pa_listarComunas" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_listarComunas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.pa_listarComunas_Result">
+                <ScalarProperty Name="idComuna" ColumnName="idComuna" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_listarRecargas" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_listarRecargas" />
+          <FunctionImportMapping FunctionImportName="pa_modificarComuna" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_modificarComuna" />
+          <FunctionImportMapping FunctionImportName="pa_realizarRecarga" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.pa_realizarRecarga" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB_PAAC3GN3ANDAURGOTSCHLICHVALENZUELAModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
