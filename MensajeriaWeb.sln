@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MensajeriaWeb", ".", "{17ACBDB2-D7B9-4712-89D2-B71C59933A5B}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SistemaMensajeria2.0", ".", "{17ACBDB2-D7B9-4712-89D2-B71C59933A5B}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_49729"
 		Debug.AspNetCompiler.PhysicalPath = "..\MensajeriaWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49729\"
