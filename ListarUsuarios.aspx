@@ -11,7 +11,7 @@
         }
         .auto-style3 {
             height: 43px;
-            text-align: left;
+            text-align: left; 
             width: 253px;
         }
         .auto-style4 {
