@@ -1,5 +1,4 @@
-﻿using C3LNegG3AndaurGotschlichValenzuela;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
@@ -7,7 +6,7 @@ using System.Web.UI.WebControls;
 
 public partial class ListarComunas : System.Web.UI.Page
 {
-    
+    ComunaADO objComuna = new ComunaADO();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -18,12 +17,8 @@ public partial class ListarComunas : System.Web.UI.Page
     }
     public void recargarDatos()
     {
-        Comuna objComuna = new Comuna();
-        objComuna.Nombre = txtBuscarComuna.Text;
-        objComuna.listar(objComuna);
-        dgListar.DataSource = objComuna.Ds;
+        dgListar.DataSource = objComuna.getComunas();
         dgListar.DataBind();
-        
     }
     public void cancelarEdicion()
     {
@@ -37,11 +32,18 @@ public partial class ListarComunas : System.Web.UI.Page
 
     protected void rowDeletingEvent(object sender, GridViewDeleteEventArgs e)
     {
-        Comuna objComuna = new Comuna();
-        objComuna.Id = Convert.ToInt16(dgListar.DataKeys[e.RowIndex].Values["idComuna"].ToString());
-        objComuna.eliminar(objComuna);
-        lblMensaje.Text = "*"+objComuna.Mensaje+"*";
-        recargarDatos();
+        try
+        {
+            Comuna comuna = new Comuna();
+            comuna.idComuna = Convert.ToInt16(dgListar.DataKeys[e.RowIndex].Values["idComuna"].ToString());
+            objComuna.eliminarComuna(comuna.idComuna);
+            lblMensaje.Text = "*" + objComuna.Mensaje + "*";
+            recargarDatos();
+        }catch(Exception ex)
+        {
+            lblMensaje.Text = "Error al eliminar comuna por favor revise que ningun usuario este asociado a esta comuna.";
+        }
+        
 
     }
 
@@ -53,18 +55,25 @@ public partial class ListarComunas : System.Web.UI.Page
     }
     protected void rowUpdatingEvent(object sender, GridViewUpdateEventArgs e)
     {
-        Comuna objComuna = new Comuna();
-        objComuna.Id = Convert.ToInt16(dgListar.DataKeys[e.RowIndex].Values["idComuna"].ToString());
-        objComuna.Nombre = (dgListar.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text.ToUpper();
-        objComuna.modificar(objComuna);
+        
+        int idComuna = Convert.ToInt16(dgListar.DataKeys[e.RowIndex].Values["idComuna"].ToString());
+        String nombre = (dgListar.Rows[e.RowIndex].FindControl("txtNombre") as TextBox).Text;
+        Comuna comuna = objComuna.buscarComunas(idComuna);
+        comuna.Nombre = nombre;
+        objComuna.modificarComuna(comuna);
         lblMensaje.Text = "*" + objComuna.Mensaje + "*";
-
+        
         cancelarEdicion();
         recargarDatos();
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        recargarDatos();
+        
+    }
+
+    protected void rowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
     }
 }

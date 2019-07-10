@@ -1,5 +1,4 @@
-﻿using C3LNegG3AndaurGotschlichValenzuela;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web;
@@ -34,8 +33,10 @@ public partial class AgregarUsuario : System.Web.UI.Page
 
     }
 
+   
     public int obtenerIdComuna(string nombreComuna)
     {
+
         Comuna objcomuna = new Comuna();
         int idcomuna = 0;
         objcomuna.Nombre = nombreComuna;
@@ -53,6 +54,7 @@ public partial class AgregarUsuario : System.Web.UI.Page
 
     protected void btnagregarUsuario_Click(object sender, EventArgs e)
     {
+  
         C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
         objusuario.Rut = txtrut.Text;
         objusuario.PrimerNombre = txtprimernombre.Text;
@@ -84,5 +86,6 @@ public partial class AgregarUsuario : System.Web.UI.Page
             LabelIngreo.Visible = true;
             LabelIngreo.Text = "Error al ingresar";
         }
+
     }
 }

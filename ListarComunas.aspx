@@ -53,7 +53,7 @@
         <tr>
             <td class="auto-style10" colspan="2">
                 <strong>
-                <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style7"></asp:Label>
+                <asp:Label ID="lblMensaje" runat="server" CssClass="auto-style7" ForeColor="Red"></asp:Label>
                 </strong>
             </td>
         </tr>
@@ -62,7 +62,7 @@
                 <asp:GridView ID="dgListar" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
                     EnableModelValidation="True" ForeColor="Black" GridLines="Vertical" OnRowCancelingEdit="rowCancelEditEvent" OnRowDeleting="rowDeletingEvent" 
                     OnRowEditing="rowEditingEvent" AutoGenerateColumns="False"
-                    CssClass="auto-style4" Width="449px" DataKeyNames="idComuna" OnRowUpdating="rowUpdatingEvent">
+                    CssClass="auto-style4" Width="449px" DataKeyNames="idComuna" OnRowUpdating="rowUpdatingEvent" OnRowDataBound="rowDataBound">
                     <AlternatingRowStyle BackColor="#CCCCCC" />
                     <Columns>
                         <asp:TemplateField HeaderText="Nombre">
