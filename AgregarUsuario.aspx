@@ -12,10 +12,6 @@
             width: 575px;
             height: 26px;
         }
-        .auto-style5 {
-            height: 26px;
-        width: 41px;
-    }
         .auto-style6 {
             width: 345px;
         }
@@ -32,31 +28,26 @@
             width: 345px;
             height: 20px;
         }
-        .auto-style10 {
-            height: 20px;
-        width: 41px;
-    }
-    .auto-style11 {
-        width: 41px;
-    }
-    </style>
+        </style>
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <p>Agregar Usuario</p>
+    <p><strong>Agregar Usuario</strong></p>
     <asp:Panel ID="Panel1" runat="server" Height="500px">
-        <table style="width: 100%; table-layout: auto; background-color: #B8DCDC;" border="1">
+        <table style="border: thin solid #000000; width: 100%; table-layout: auto; background-color: #B8DCDC;" border="1">
             <tr>
                 <td class="auto-style3">rut</td>
                 <td class="auto-style6">
                     &nbsp;<asp:TextBox ID="txtrut" runat="server"></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="regexRut" runat="server" ControlToValidate="txtrut" ErrorMessage="Ingrese un rut valido" ValidationExpression=" \b(\d{1,3}(?:(.?)\d{3}){2}(-?)[\dkK])\b"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style3">primer nombre</td>
                 <td class="auto-style6">
                     &nbsp;<asp:TextBox ID="txtprimernombre" runat="server"></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="regexPnombre" runat="server" ControlToValidate="txtprimernombre" ErrorMessage="CAMPO VACIO"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>
