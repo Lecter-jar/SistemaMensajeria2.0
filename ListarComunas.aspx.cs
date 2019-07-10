@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 
 public partial class ListarComunas : System.Web.UI.Page
 {
+
     ComunaADO objComuna = new ComunaADO();
     protected void Page_Load(object sender, EventArgs e)
     {

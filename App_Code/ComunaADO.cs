@@ -12,7 +12,6 @@ public class ComunaADO
     private String mensaje;
     public ComunaADO()
     {
-
     }
     public string Mensaje
     {

@@ -11,7 +11,6 @@ public partial class AgregarComuna : System.Web.UI.Page
     {
 
     }
-
     protected void btnAgregar_Click(object sender, EventArgs e)
     {
         Comuna nuevaComuna = new Comuna();   
