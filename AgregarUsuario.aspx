@@ -40,14 +40,12 @@
                 <td class="auto-style3">rut</td>
                 <td class="auto-style6">
                     &nbsp;<asp:TextBox ID="txtrut" runat="server"></asp:TextBox>
-                    <asp:RegularExpressionValidator ID="regexRut" runat="server" ControlToValidate="txtrut" ErrorMessage="Ingrese un rut valido" ValidationExpression=" \b(\d{1,3}(?:(.?)\d{3}){2}(-?)[\dkK])\b"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style3">primer nombre</td>
                 <td class="auto-style6">
                     &nbsp;<asp:TextBox ID="txtprimernombre" runat="server"></asp:TextBox>
-                    <asp:RegularExpressionValidator ID="regexPnombre" runat="server" ControlToValidate="txtprimernombre" ErrorMessage="CAMPO VACIO"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>

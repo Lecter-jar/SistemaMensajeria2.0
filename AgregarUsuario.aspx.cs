@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 public partial class AgregarUsuario : System.Web.UI.Page
 {
+
+    UsuarioADO usuarioAdo = new UsuarioADO(); // se instancia la clase usuario ado
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -54,7 +57,7 @@ public partial class AgregarUsuario : System.Web.UI.Page
 
     protected void btnagregarUsuario_Click(object sender, EventArgs e)
     {
-  
+
         C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
         objusuario.Rut = txtrut.Text;
         objusuario.PrimerNombre = txtprimernombre.Text;
@@ -67,7 +70,11 @@ public partial class AgregarUsuario : System.Web.UI.Page
         objusuario.IdComuna = obtenerIdComuna(DropDownListcomuna.SelectedItem.Text);
         objusuario.Region = DropDownListregion.SelectedItem.Text;
 
-        objusuario.ingresar(objusuario);
+        //usuarioAdo.agregar(objusuario);
+
+
+
+
         if (objusuario.Exito == true)
         {
             LabelIngreo.Visible = true;
@@ -84,7 +91,7 @@ public partial class AgregarUsuario : System.Web.UI.Page
         else
         {
             LabelIngreo.Visible = true;
-            LabelIngreo.Text = "Error al ingresar";
+            LabelIngreo.Text = usuarioAdo.Mensaje;
         }
 
     }

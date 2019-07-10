@@ -7,12 +7,16 @@ using System.Web.UI.WebControls;
 
 public partial class ListarUsuarios : System.Web.UI.Page
 {
+
+    UsuarioADO objUsuarioADO = new UsuarioADO();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             recargarDatos();
         }
+        Labelerror.Text = "";
     }
 
     public void cancelarEdicion()
@@ -23,10 +27,8 @@ public partial class ListarUsuarios : System.Web.UI.Page
 
     public void recargarDatos()
     {
-        C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
-        objusuario.Id = 0;
-        objusuario.listar(objusuario);
-        GridView1.DataSource = objusuario.Ds;
+        
+        GridView1.DataSource = objUsuarioADO.getUsuarios();
         GridView1.DataBind();
 
     }
@@ -53,10 +55,21 @@ public partial class ListarUsuarios : System.Web.UI.Page
 
     protected void RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
-        objusuario.Id = Convert.ToInt16(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString());
-        objusuario.eliminar(objusuario);
-        recargarDatos();
+        try
+        {
+            C3LNegG3AndaurGotschlichValenzuela.Usuario usuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
+            usuario.Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString());
+            objUsuarioADO.eliminar(usuario.Id);
+            Labelerror.Text = objUsuarioADO.Mensaje;
+            recargarDatos();
+        }
+        catch (Exception ex)
+        {
+            Labelerror.Text = objUsuarioADO.Mensaje + ex;
+
+
+        }
+
     }
 
     protected void rowEditingEvent(object sender, GridViewEditEventArgs e)
@@ -67,23 +80,40 @@ public partial class ListarUsuarios : System.Web.UI.Page
 
     protected void rowUpdatingEvent(object sender, GridViewUpdateEventArgs e)
     {
-        C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
-        objusuario.Id = int.Parse(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString());
-        objusuario.Rut = (GridView1.Rows[e.RowIndex].FindControl("txtRut") as TextBox).Text.ToUpper();
-        objusuario.PrimerNombre = (GridView1.Rows[e.RowIndex].FindControl("txtPrimerNombre") as TextBox).Text.ToUpper();
-        objusuario.SegundoNombre = (GridView1.Rows[e.RowIndex].FindControl("txtSegundoNombre") as TextBox).Text.ToUpper();
-        objusuario.ApellidoMaterno = (GridView1.Rows[e.RowIndex].FindControl("txtApeMaterno") as TextBox).Text.ToUpper();
-        objusuario.ApellidoPaterno = (GridView1.Rows[e.RowIndex].FindControl("txtApePaterno") as TextBox).Text.ToUpper();
-        objusuario.Calle = (GridView1.Rows[e.RowIndex].FindControl("txtCalle") as TextBox).Text.ToUpper();
-        objusuario.NumeroDomicilio = int.Parse((GridView1.Rows[e.RowIndex].FindControl("txtNumeroDomicilio") as TextBox).Text.ToUpper());
-        objusuario.Banco = (GridView1.Rows[e.RowIndex].FindControl("txtBanco") as TextBox).Text.ToUpper();
-        objusuario.IdComuna = int.Parse(((GridView1.Rows[e.RowIndex].FindControl("txtComuna") as TextBox).Text.ToUpper()));
-        objusuario.Region = (GridView1.Rows[e.RowIndex].FindControl("txtRegion") as TextBox).Text.ToUpper();
-        objusuario.modificar(objusuario);
-        if (!objusuario.Exito)
-        {
-            Labelerror.Text = objusuario.Mensaje;
-        }
+        
+        Usuario usuario = new Usuario(); // se instancia un obj usuario
+
+        int id = int.Parse(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString()); // se obtiene el id segun el gridview obtenido
+
+        // se asignan los valores obtenidos del gridview 
+        String rut = (GridView1.Rows[e.RowIndex].FindControl("txtRut") as TextBox).Text.ToUpper();
+        String primerNombre = (GridView1.Rows[e.RowIndex].FindControl("txtPrimerNombre") as TextBox).Text.ToUpper();
+        String segundoNombre = (GridView1.Rows[e.RowIndex].FindControl("txtSegundoNombre") as TextBox).Text.ToUpper();
+        String apeMaterno = (GridView1.Rows[e.RowIndex].FindControl("txtApeMaterno") as TextBox).Text.ToUpper();
+        String apePaterno = (GridView1.Rows[e.RowIndex].FindControl("txtApePaterno") as TextBox).Text.ToUpper();
+        String calle = (GridView1.Rows[e.RowIndex].FindControl("txtCalle") as TextBox).Text.ToUpper();
+        String numeroDomicilio = (GridView1.Rows[e.RowIndex].FindControl("txtNumeroDomicilio") as TextBox).Text.ToUpper();
+        int idBanco = int.Parse(GridView1.DataKeys[e.RowIndex].Values["Banco"].ToString());
+        int idComuna = int.Parse(GridView1.DataKeys[e.RowIndex].Values["Comuna"].ToString());
+        int idRegion = int.Parse(GridView1.DataKeys[e.RowIndex].Values["Region"].ToString());
+
+
+        usuario = objUsuarioADO.buscar(id); // se obtiene el usuario segun el id
+
+        // se asignan los nuevos valores
+        usuario.Rut = rut;
+        usuario.Primer_nombre = primerNombre;
+        usuario.Segundo_nombre = segundoNombre;
+        usuario.Apellido_materno = apeMaterno;
+        usuario.Apellido_paterno = apePaterno;
+        usuario.Calle = calle;
+        usuario.Numero_domicilio = numeroDomicilio;
+        usuario.Banco = idBanco;
+        usuario.Comuna = idComuna;
+        usuario.Region = idRegion;
+
+        objUsuarioADO.modificarUsuario(usuario); // se modifican los atributos del usuario encontrado
+
         cancelarEdicion();
         recargarDatos();
     }
