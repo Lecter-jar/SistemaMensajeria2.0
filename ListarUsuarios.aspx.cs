@@ -57,9 +57,9 @@ public partial class ListarUsuarios : System.Web.UI.Page
     {
         try
         {
-            C3LNegG3AndaurGotschlichValenzuela.Usuario usuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
-            usuario.Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString());
-            objUsuarioADO.eliminar(usuario.Id);
+            Usuario usuario = new Usuario();
+            usuario.idUsuario = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values["idUsuario"].ToString());
+            objUsuarioADO.eliminar(Convert.ToInt32(usuario.idUsuario));
             Labelerror.Text = objUsuarioADO.Mensaje;
             recargarDatos();
         }

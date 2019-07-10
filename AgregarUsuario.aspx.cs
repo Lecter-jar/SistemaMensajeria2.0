@@ -9,90 +9,84 @@ public partial class AgregarUsuario : System.Web.UI.Page
 {
 
     UsuarioADO usuarioAdo = new UsuarioADO(); // se instancia la clase usuario ado
+    BancoADO bancoAdo = new BancoADO(); // se instancia la clase banco ado
+    ComunaADO comunaAdo = new ComunaADO(); // se instancia la clase comuna ado
+    RegionADO regionAdo = new RegionADO(); // se instancia la clase region ado
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            iniciarLlenadoBanco();
             iniciarLlenadoComuna();
+            iniciarLlenadoRegion();
+
         }
     }
 
+    private void iniciarLlenadoBanco()
+    {
+
+        DropDownListbanco.DataSource = comunaAdo.getComunas();
+        DropDownListbanco.DataTextField = "Nombre";
+        DropDownListbanco.DataValueField = "idBanco";
+        DropDownListbanco.DataBind();
+
+    }
 
     private void iniciarLlenadoComuna()
     {
-        Comuna objcomuna = new Comuna();
 
-        objcomuna.Nombre = "";
-
-        objcomuna.listar(objcomuna);
-
-        DropDownListcomuna.Items.Add("Seleccionar comuna");
-
-        foreach (DataRow row in objcomuna.Ds.Tables[0].Rows)
-        {
-            DropDownListcomuna.Items.Add(Convert.ToString(row[1]));
-        }
+        DropDownListcomuna.DataSource = comunaAdo.getComunas();
+        DropDownListcomuna.DataTextField = "Nombre";
+        DropDownListcomuna.DataValueField = "idComuna";
+        DropDownListcomuna.DataBind();
 
     }
 
-   
-    public int obtenerIdComuna(string nombreComuna)
+    private void iniciarLlenadoRegion()
     {
 
-        Comuna objcomuna = new Comuna();
-        int idcomuna = 0;
-        objcomuna.Nombre = nombreComuna;
+        DropDownListregion.DataSource = comunaAdo.getComunas();
+        DropDownListregion.DataTextField = "Nombre";
+        DropDownListregion.DataValueField = "idRegion";
+        DropDownListregion.DataBind();
 
-        objcomuna.listar(objcomuna);
-        foreach (DataRow filas in objcomuna.Ds.Tables["Table"].Rows)
-        {
-            idcomuna = int.Parse(filas["idComuna"].ToString());
-
-        }
-
-        return idcomuna;
     }
 
 
     protected void btnagregarUsuario_Click(object sender, EventArgs e)
     {
+        Banco banco = bancoAdo.buscarBancos(Convert.ToInt32(DropDownListbanco.SelectedValue));
+        Comuna comuna = comunaAdo.buscarComunas(Convert.ToInt32(DropDownListcomuna.SelectedValue));
+        Region region = regionAdo.buscarRegiones(Convert.ToInt32(DropDownListregion.SelectedValue));
 
-        C3LNegG3AndaurGotschlichValenzuela.Usuario objusuario = new C3LNegG3AndaurGotschlichValenzuela.Usuario();
+        Usuario objusuario = new Usuario();
         objusuario.Rut = txtrut.Text;
-        objusuario.PrimerNombre = txtprimernombre.Text;
-        objusuario.SegundoNombre = txtsegundonombre.Text;
-        objusuario.ApellidoMaterno = txtapematerno.Text;
-        objusuario.ApellidoPaterno = txtapepaterno.Text;
+        objusuario.Primer_nombre = txtprimernombre.Text;
+        objusuario.Segundo_nombre = txtsegundonombre.Text;
+        objusuario.Apellido_materno = txtapematerno.Text;
+        objusuario.Apellido_paterno = txtapepaterno.Text;
         objusuario.Calle = txtcalle.Text;
-        objusuario.NumeroDomicilio = int.Parse(txtnumerodom.Text);
-        objusuario.Banco = DropDownListbanco.SelectedItem.Text;
-        objusuario.IdComuna = obtenerIdComuna(DropDownListcomuna.SelectedItem.Text);
-        objusuario.Region = DropDownListregion.SelectedItem.Text;
+        objusuario.Numero_domicilio = txtnumerodom.Text;
+        objusuario.Banco = banco.idBanco;
+        objusuario.Comuna = comuna.idComuna;
+        objusuario.Region = region.idRegion;
 
-        //usuarioAdo.agregar(objusuario);
+        usuarioAdo.agregar(objusuario);
 
-
-
-
-        if (objusuario.Exito == true)
-        {
-            LabelIngreo.Visible = true;
-            LabelIngreo.Text = "Usuario Ingresado";
-            txtrut.Text = "";
-            txtprimernombre.Text = "";
-            txtsegundonombre.Text = "";
-            txtapematerno.Text = "";
-            txtapepaterno.Text = "";
-            txtcalle.Text = "";
-            txtnumerodom.Text = "";    
-
-        }
-        else
-        {
-            LabelIngreo.Visible = true;
-            LabelIngreo.Text = usuarioAdo.Mensaje;
-        }
+        LabelIngreo.Visible = true;
+        LabelIngreo.Text = "Usuario Ingresado";
+        txtrut.Text = "";
+        txtprimernombre.Text = "";
+        txtsegundonombre.Text = "";
+        txtapematerno.Text = "";
+        txtapepaterno.Text = "";
+        txtcalle.Text = "";
+        txtnumerodom.Text = "";       
 
     }
-}
+
+
+} // fin agregar usuario
